@@ -1,0 +1,119 @@
+1.	创建一个考试文件夹（名称为班级 学号姓名，如：计1 201450147张三）。考试文件夹下创建一个名为exam的工作目录和一个名为“screenshot”的文件夹（考试中的截图都保存在这里）。
+
+2.在工作目录中初始化一个git版本库。
+git init
+
+3.	设置全局用户名为自己的姓名拼音，邮件地址随意，颜色方案设置为“always”。显示版本库中已设置的全局变量，截图保存（图一）。
+git congif --global user.name “liaoxiang”
+git config --global user.email “liaoxiang@qq.com”
+git config --global color.ui “always”
+git config --global --list
+
+4.	创建exam.txt文件，添加适当内容后提交，提交留言为：for the 1st time，create exam.txt file。
+vim exam.txt
+git add exam.txt
+git commit -m “for the 1st time，create exam.txt file”
+
+5.	在exam.txt文件中增加一行内容，查看版本库状态，截图保存结果（图二）。
+git status
+
+6.	启动缓存区交互模式，将exam.txt文件添加到缓存区，截图添加过程（图三），退出交互模式。
+git add -i
+
+7.	比较工作目录和缓存区中exam.txt文件的异同，截图保存命令行和结果（图四），
+git diff --cached
+
+8.	将缓存区内容添加到版本库，提交留言为：for the 2nd time，edit exam.txt file。
+git commit -m “for the 2nd time，edit exam.txt file”
+
+9.	从主分支上创建并切换到一个名称为rb_1.0的分支。截图输入的命令和屏幕显示（图五）。
+git checkout -b rb_1.0
+
+10.	在rb_1.0分支上修改exam.txt文件，提交文件修改，留言为：for the 3rd time，edit exam.txt file。
+git commit -a -m “for the 3rd time，edit exam.txt file”
+
+11.	回到主分支，在exam.txt文件中增加一行内容后提交，留言为：for the 4th time，edit exam.txt file。
+git checkout master
+git commit -a -m “for the 4th time，edit exam.txt file”
+
+12.	从主分支上创建一个名称为rb_2.0的分支。
+git checkout -b rb_2.0
+
+
+13.	切换到rb_2.0分支，查看版本库中的所有分支，截图保存命令行和结果（图六）。
+git branch
+
+14.在rb_2.0分支创建文件a.txt,添加内容后提交，留言为：for the 5th time，create a.txt file。
+在rb_2.0分支创建文件b.txt,添加内容后提交，留言为：for the 6th time，create b.txt file。
+在rb_2.0分支创建文件c.txt,添加内容后提交，留言为：for the 7th time，create c.txt file。
+vim a.txt
+git add a.txt
+git commit -m “for the 5th time，create a.txt file”
+
+14.	给分支rb_1.0打标签1.0，给分支rb_2.0打标签2.0。显示所有标签，截图保存结果（图七）。
+git tag 1.0 rb_1.0
+git tag 2.0 rb_2.0
+git tag
+
+15.	回到主分支上创建并切换到一个名称为rb_3.0的分支。
+git checkout master
+git checkout -b rb_3.0
+
+17.创建文件d.txt,添加内容后提交，留言为：for the 8th time，create d.txt file。
+创建文件e.txt,添加内容后提交，留言为：for the 9th time，create e.txt file。
+创建文件f.txt,添加内容后提交，留言为：for the 10th time，create f.txt file。
+vim d.txt
+git add d.txt
+git commit -m “for the 8th time，create d.txt file”
+
+18.	删除分支rb_1.0。将分支rb_2.0改名为rb_2.0.0。
+git branch -D rb_1.0
+git branch -m rb_2.0 rb_2.0.0
+git branch
+
+19.	将第6、7次提交拣选合并到主分支。
+git checkout master
+git cherry-pick hashCode
+
+20.	显示exam.txt文件中第2行和第3行代码的信息，截图保存结果（图八）。
+git blame -L 2,3 exam.txt
+
+21.	将文件exam.txt在版本库中改名为“姓名拼音.txt”(如zhangsan.txt)，提交留言为：for the 12th time，rename exam.txt to 姓名拼音.txt。
+git mv exam.txt liaoxiang.txt
+git commit -m “for the 12th time，rename exam.txt to 姓名拼音.txt”
+
+
+22.	显示主分支上的历史记录，每个记录只显示作者的姓名，截图保存结果（图九）。
+git log --format=”%an”
+
+23.	显示主分支上第2次提交记录，提交记录显示一行。截图保存命令行和结果（图十）。
+git log HEAD~3 -1
+
+24.	显示rb_3.0分支上最近四次提交，每次提交记录都显示一行。截图保存（图十一）。
+git checkout rb_3.0
+git log --pretty=oneline -4
+
+25.	将第9次和第10次的提交记录颠倒顺序。
+git rebase -i HEAD~3
+再将两条记录交换顺序
+
+26.	修改第8次提交记录的留言，新留言为：8th，create d.txt file。
+git rebase -i HEAD~3
+再使用reword改留言
+
+27.	在工作目录中创建一个ceshi.txt的文件，使版本库忽略该文件，截图忽略方法（图十二）。
+vim ceshi.txt
+vim .gitignore
+在.gitigore文件中输入ceshi. txt
+git status
+
+28.利用标签恢复rb_1.0分枝，命名为rb_1.0.0。
+git branch rb_1.0.0 1.0
+git branch
+
+29.压缩版本库，截图命令行和结果（图十三）。
+git gc
+
+30.发布主分支最后一个版本。生成压缩包名称为：git.zip，父目录名为：master。
+ git archive --format=zip --prefix=master/ HEAD > git.zip
+
