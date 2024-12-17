@@ -1,0 +1,22 @@
+git config --global user.name or color.ui "always"
+git status
+git add -i
+git diff --cached / no cached
+**tag** git tag 1.0 rb_1.0
+git tag to show all tags
+git branch -D rb_1.0
+git branch -m rb_2.0 rb_2.0.0
+git cherry-pick <HASH-CODE>
+git blame -L 2,3 exam.txt
+git mv~~~
+git log HEAD~4 -1
+git log -pretty=oneline -4
+git rebase -i, and swap the line 9 and line 10
+to modify message **reword**.
+
+git branch rb_1.0.0 1.0
+
+git gc
+git archive --format=zip --prefix=master/ HEAD > git.zip
+
+
